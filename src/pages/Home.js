@@ -1,5 +1,6 @@
 import React, { 
   Fragment, 
+  useEffect, 
   useState 
 } from 'react';
 import { 
@@ -15,16 +16,31 @@ import { SkillCard } from '../components/SkillCard';
 export function Home() {
   const [newSkill, setNewSkill] = useState('');
   const [mySkills, setMySkills] = useState([]);
+  const [greetings, setGreetings] = useState('');
 
   function handleAddNewSkill() {
     setMySkills(oldState => [...oldState, newSkill]);
   }
+
+  useEffect(() => {
+    const currentHour = new Date().getHours();
+    if (currentHour < 12) {
+      setGreetings("Good morning!");
+    } else if (currentHour > 12 & currentHour < 18) {
+      setGreetings("Good afternoon!");
+    } else {
+      setGreetings("Good night!")
+    }
+  }, [])
 
   return (
     <Fragment>
       <View style={styles.container}>
         <Text style={styles.title}>
           Welcome, Thiago Costa
+        </Text>
+        <Text style={styles.greetings}>
+          {greetings}
         </Text>
        
         <TextInput 
@@ -39,6 +55,8 @@ export function Home() {
         <Text style={[styles.title, {marginVertical: 50}]}>
           My Skills
         </Text>
+
+
 
         <FlatList
           data={mySkills}
@@ -71,5 +89,8 @@ const styles = StyleSheet.create({
     padding: 15,
     marginTop: 30,
     borderRadius: 7
+  },
+  greetings: {
+    color: "#fff"
   }
 })

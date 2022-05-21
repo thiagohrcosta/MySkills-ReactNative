@@ -14,7 +14,7 @@ import { SkillCard } from '../components/SkillCard';
 
 export function Home() {
   const [newSkill, setNewSkill] = useState('');
-  const [mySkills, setMySkills] = useState([])
+  const [mySkills, setMySkills] = useState([]);
 
   function handleAddNewSkill() {
     setMySkills(oldState => [...oldState, newSkill]);
@@ -47,10 +47,8 @@ export function Home() {
             <SkillCard skill={item} />
           )}
         />      
-        
       </View>
     </Fragment>
-    
   )
 }
 

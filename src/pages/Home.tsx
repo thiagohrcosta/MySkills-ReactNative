@@ -29,7 +29,11 @@ export function Home() {
       name: newSkill,
     }
 
-    setMySkills(oldState => [...oldState, data]);
+    if (data.name === null || data.name === "") {
+      return;
+    } else {
+      setMySkills(oldState => [...oldState, data]);
+    }
   }
 
   useEffect(() => {
@@ -60,7 +64,10 @@ export function Home() {
           onChangeText={setNewSkill}
         />
 
-        <Button onPress={handleAddNewSkill} />
+        <Button 
+          onPress={handleAddNewSkill} 
+          title="Add"
+        />
 
         <Text style={[styles.title, {marginVertical: 50}]}>
           My Skills
